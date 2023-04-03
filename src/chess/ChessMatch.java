@@ -90,12 +90,14 @@ public class ChessMatch {
             capturedPieces.add(capturedPiece);
         }
         board.placePiece(p, target);
+        ((ChessPiece)p).increaseMoveCount();
         return capturedPiece;
     }
 
     private void undoMove(Position source, Position target, Piece capturedPiece) {
         Piece p = board.removePiece(target);
         board.placePiece(p, source);
+        ((ChessPiece)p).decreaseMoveCount();
 
         if (capturedPiece != null) {
             board.placePiece(capturedPiece, target);

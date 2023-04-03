@@ -27,10 +27,16 @@ public class Pawn extends ChessPiece {
         boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
         Position p = new Position(0, 0);
 
-        //ABOVE
+        //WHITE
         if (this.getColor() == Color.WHITE) {
+            //ABOVE
             p.setValues(position.getRow() - 1, position.getColumn());
             if (getBoard().positionExists(p) && canMove(p)) {
+                mat[p.getRow()][p.getColumn()] = true;
+            }
+            //DOUBLE UP
+            p.setValues(position.getRow() - 2, position.getColumn());
+            if (getBoard().positionExists(p) && canMove(p) && this.getMoveCount() == 0) {
                 mat[p.getRow()][p.getColumn()] = true;
             }
 
@@ -45,10 +51,17 @@ public class Pawn extends ChessPiece {
             if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
                 mat[p.getRow()][p.getColumn()] = true;
             }
-        } else {
+        }
+        //BLACK
+        else {
             //DOWN
             p.setValues(position.getRow() + 1, position.getColumn());
             if (getBoard().positionExists(p) && canMove(p)) {
+                mat[p.getRow()][p.getColumn()] = true;
+            }
+            //DOUBLE DOWN
+            p.setValues(position.getRow() + 2, position.getColumn());
+            if (getBoard().positionExists(p) && canMove(p) && this.getMoveCount() == 0) {
                 mat[p.getRow()][p.getColumn()] = true;
             }
 
